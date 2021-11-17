@@ -2,7 +2,7 @@ const { prefix } = require('./config.json');
 
 const deleter = (message, range) => {
 	const range1 = range[0]; //indexes are already an array so we get the first index 
-	const amnt = parseInt(range[1]) - parseInt(range[0]); //makes the str index ints
+	const amnt = parseInt(range[1]) - parseInt(range[0]); //makes th e str index ints
 	var msgs, nID;
 	
 	message.channel.messages.fetch({
