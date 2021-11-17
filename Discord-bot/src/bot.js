@@ -1,8 +1,8 @@
 const config = require('./config.json');
 const command = require('./command');
 const firstMessage = require('./first-message');
-const replyimg = require('./reply-img');
 const rg_handler = require('./range-handler');
+const reactions = require('./bot-reactions');
 
 const { Client, Intents, Permissions } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
@@ -14,6 +14,8 @@ client.on('ready', () => {
 	command(client, 'ping', message => {
 		message[0].channel.send('Pong!');
 	});
+
+
 
 	//List how many users (or bots) are on the server *change to only listing non-bot users*
 	command(client, 'servers', message => {
@@ -59,6 +61,7 @@ client.on('ready', () => {
 		rg_handler(message[0], content, command);
 	});
 
+	reactions(client);
 
 	//firstMessage(client, '897626990960582668', 'hello world!!!', ['🧏‍♂️', '😁']);
 });

@@ -1,3 +1,15 @@
+var fs = require('fs');
+var https = require('https');
+
+//Node.js Function to save image from External URL.
+function saveImageToDisk(url, localPath) {
+    var fullUrl = url;
+    var file = fs.createWriteStream(localPath);
+    var request = https.get(url, function(response) {
+    response.pipe(file);
+    });
+}
+
 function send(message, url){
     message.channel.send({
       files: [{
@@ -9,15 +21,20 @@ function send(message, url){
 
 function attachIsImage(msgAttach) {
     const im = msgAttach.attachments;
+    console.log(im);
     //True if this url is a png image.
 
     img = Array.from(im);
-    
+        
     try {
     	const ctype = img[0][1].contentType;
     	if (ctype.includes('image')) {
-            console.log("success n stuf");
-            send(this.message, img[0][1].url);
+            const imgr = img[0][1];
+            //const type = imgr.contentType;
+            console.log("C:\\Users\\julkt\\Pictures\\thetrest\\" + imgr.name)
+            //send(this.message, img[0][1].url);
+            fs.mkdirSync("C:\\Users\\julkt\\Pictures\\thetrest\\test", { recursive: true });
+            saveImageToDisk(img[0][1].url, "C:\\Users\\julkt\\Pictures\\thetrest\\test\\" + imgr.name);
             return true;
         }
     }
