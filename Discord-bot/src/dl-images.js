@@ -1,5 +1,9 @@
 var fs = require('fs');
 var https = require('https');
+import * as Struct from 'ref-struct'
+import { DModel as M, DStruct as DS } from 'win32-api'
+
+const path: M.path_struct = new Struct(DS.KNOWNFOLDERID)();
 
 //Node.js Function to save image from External URL.
 function saveImageToDisk(url, localPath) {
